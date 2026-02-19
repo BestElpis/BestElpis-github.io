@@ -1,0 +1,32 @@
+.btn {
+  display: inline-flex;
+  box-sizing: border-box;
+  padding: 15px 40px;
+  border: 1px solid @black;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  color: @black;
+  font-family: "Open Seans", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.375;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover,
+  &:active {
+   background-color: @black;
+   color: #ffffff;
+   transition: background-color 0.2s, color 0.2s; /*меняются 2 свойства, поэтому указываем 2 времени*/
+  }
+  &__red {
+    background-color: @red;
+    border-color: @red;
+    color: @white;
+    &:hover { //при наведении меняется цвет
+        background-color: @red_dark;
+        border-color: @red_dark;
+    }
+  }
+}

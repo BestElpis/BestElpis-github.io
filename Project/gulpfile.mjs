@@ -5,7 +5,7 @@ import include from "gulp-file-include";
 import formatHTML from "gulp-format-html";
 
 import less from "gulp-less";
-import gulpPlumber from "gulp-plumber";
+import plumber from "gulp-plumber";
 import postcss from "gulp-postcss";
 import autoprefixer from "autoprefixer";
 import sortMediaQueries from "postcss-sort-media-queries";
@@ -57,7 +57,7 @@ function includeHtml() {
         basepath: "@file",
       }),
     )
-    .pipe(formatHtml())
+    .pipe(formatHTML())
     .pipe(gulp.dest("dist"));
 }
 
@@ -122,7 +122,7 @@ function images() {
         imagemin_gifsicle({ interlaced: true }),
         imagemin_mozjpeg({ quality: 100, progressive: true }),
         imagemin_optipng({ optimizationLevel: 3 }),
-      ])
+      ]),
     )
     .pipe(gulp.dest("dist/assets/images"));
 }
@@ -135,12 +135,12 @@ function svgSprite() {
         js2svg: {
           pretty: true,
         },
-      })
+      }),
     )
     .pipe(
       svgstore({
         inlineSvg: true,
-      })
+      }),
     )
     .pipe(rename("symbols.svg"))
     .pipe(gulp.dest("dist/assets/icons"));
@@ -154,7 +154,7 @@ const build = gulp.series(
   js,
   jsCopy,
   images,
-  svgSprite
+  svgSprite,
 );
 
 function reloadServer(done) {
@@ -171,7 +171,11 @@ function serve() {
   gulp.watch(resources.jsDev, gulp.series(js, reloadServer));
   gulp.watch(resources.jsVendor, gulp.series(jsCopy, reloadServer));
   gulp.watch(resources.static, { delay: 500 }, gulp.series(copy, reloadServer));
-  gulp.watch(resources.images, { delay: 500 }, gulp.series(images, reloadServer));
+  gulp.watch(
+    resources.images,
+    { delay: 500 },
+    gulp.series(images, reloadServer),
+  );
   gulp.watch(resources.svgSprite, gulp.series(svgSprite, reloadServer));
 }
 

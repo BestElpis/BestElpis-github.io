@@ -8,31 +8,33 @@
     }
   }
 
-  & + article-card { //линия, которая разделяет карточки(2 и более)
+  & + .article-card {
     margin-top: 120px;
     &::before {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       margin: 0 auto 60px;
       bottom: 100%;
       left: 0;
       right: 0;
-      max-width: 1250px;
+      max-width: 1254px;
       width: 100%;
-      height: 1px;
+      height: 1.02px;
       background-color: @black;
-      pointer-events: none; //при наведении не происходит ничего
+      pointer-events: none; 
     }
   }
 
   &__link {
+    flex-shrink: 0;
+    align-self: flex-start;
     display: block;
     width: 467px;
     margin-right: 60px;
     font-size: 0;
     text-decoration: none;
-    :hover { //при наведении на картинку, подсвечивается тект заголовка
+    &:hover { 
       & ~ .article-card__info {
         .article-card__title-link {
           color: @red;
@@ -96,8 +98,11 @@
     font-size: 24px;
     color: @black;
     text-decoration-color: transparent; //прозрачный цвет подчеркивания
-    transition: color 0.2s, text-decoration-color 0.2s;
-    &:hover {  //действие при наведении мыши
+    transition:
+      color 0.2s,
+      text-decoration-color 0.2s;
+    &:hover {
+      //действие при наведении мыши
       color: @red;
       text-decoration-color: @red;
     }
@@ -114,7 +119,8 @@
     margin: 0;
   }
 
-  &__arrow {    //стрелочка
+  &__arrow {
+    //стрелочка
     position: absolute;
     right: 0;
     bottom: 30px;
